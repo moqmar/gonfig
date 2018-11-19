@@ -1,5 +1,9 @@
 package config
 
+import (
+	"strings"
+)
+
 type Type string
 
 const (
@@ -55,8 +59,21 @@ func leaf(c *Config) *Config {
 // Querying //
 //////////////
 
-func (c *Config) Get(path string) *Config {
-
+func (c *Config) Get(path ...string) *Config {
+	// TODO: why are there multiple paths?!
+	s := strings.SplitN(strings.Join(path, "."), ".", 2)
+	if len(s[0]) > 0 {
+		for _, x := range c.Children {
+			if x.Name == s[0] {
+				if len(s) > 1 {
+					return x.Get(s[1])
+				}
+				return x
+			}
+		}
+		return leaf(c)
+	}
+	return c
 }
 func (c *Config) Child(name string) *Config {
 	for _, c := range c.Children {
@@ -73,21 +90,21 @@ func (c *Config) Child(name string) *Config {
 
 // Set the value to `new` and update all children. Will remove comments and line breaks, and might reorder maps.
 func (c *Config) Update(new interface{}) error {
-
+	return nil
 }
 
 // Change so the new Value is `new`, but try to keep comments, map order and line breaks.
 func (c *Config) Apply(new interface{}) error {
-
+	return nil
 }
 
 // Replace the element by another one. Must not exist in the configuration tree yet!
 func (c *Config) Replace(new *Config) error {
-
+	return nil
 }
 
 func (c *Config) Delete() error {
-
+	return nil
 }
 
 func (c *Config) OnChange(handler func(*Config, string), deep bool) {
@@ -99,9 +116,13 @@ func (c *Config) OnChange(handler func(*Config, string), deep bool) {
 /////////////
 
 func (c *Config) Default(value interface{}) *Config {
-
+	c2 := &*c
+	if !c2.Exists {
+		apply(value, c2)
+	}
+	return c2
 }
 
 func (c *Config) Is(t Type) bool {
-
+	return true
 }
