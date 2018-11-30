@@ -25,7 +25,7 @@ package main
 
 import "github.com/moqmar/gonfig"
 
-var cfg = config.Open(config.Arg(), config.Env(), "config.yaml", "/etc/myprogram.yaml", `---
+var cfg = gonfig.Open(gonfig.Arg(), gonfig.Env(), "config.yaml", "/etc/myprogram.yaml", `---
 # Default configuration file
 # - Provides defaults for any options
 # - If none of the files listed in config.Open() exist, will be copied to the

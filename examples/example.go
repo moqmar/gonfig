@@ -1,6 +1,6 @@
 package main
 
-import "teahub.io/momar/config"
+import "github.com/moqmar/gonfig"
 
 /*
 
@@ -14,7 +14,7 @@ Accessing a comment: if e.children[2].Type == config.Comment { return e.Children
 
 func main() bool {
 
-	c := config.Open(config.Arg(), config.Env(), "config.yaml", "/etc/myprogram.yaml", config.Default(map[string]string{"hello": "world"}))
+	c := gonfig.Open(gonfig.Arg(), gonfig.Env(), "config.yaml", "/etc/myprogram.yaml", gonfig.Default(map[string]string{"hello": "world"}))
 	c.Get("some.thing.great").Default("hello world").String()
 
 	// When not checking with `Is(...)`, will return default values if non-castable
@@ -34,7 +34,7 @@ func main() bool {
 
 	// and: [true, true, true]
 	x := c.Get("and").Default([]bool{false})
-	if x.Is(config.BoolList) {
+	if x.Is(gonfig.BoolList) {
 		for b := range x.BoolList() {
 			if x == false {
 				return false
