@@ -21,34 +21,26 @@ type stringable interface {
 }
 
 func (c *Config) String() string {
-	// FIXME: Type-Switch?!
-
-	s1, ok := c.Value.(string)
-	if ok {
-		return s1
+	switch val := c.Value.(type) {
+	case string:
+		return val
+	case int:
+		return strconv.Itoa(val)
+	case int16:
+		return strconv.FormatInt(int64(val), 10)
+	case int32:
+		return strconv.FormatInt(int64(val), 10)
+	case int8:
+		return strconv.FormatInt(int64(val), 10)
+	case int64:
+		return strconv.FormatInt(val, 10)
+	case float32:
+		return strconv.FormatFloat(float64(val), 'f', 3, 32)
+	case float64:
+		return strconv.FormatFloat(val, 'f', 3, 64)
+	case bool:
+		return strconv.FormatBool(val)
 	}
-
-	s2, ok := c.Value.(stringable)
-	if ok {
-		return s2.String()
-	}
-
-	// FIXME: Nur mit int64, nicht mit int?
-	s3, ok := c.Value.(int64)
-	if ok {
-		return strconv.FormatInt(s3, 10)
-	}
-
-	s4, ok := c.Value.(float64)
-	if ok {
-		return strconv.FormatFloat(s4, 'f', 3, 64)
-	}
-
-	s5, ok := c.Value.(bool)
-	if ok {
-		return strconv.FormatBool(s5)
-	}
-
 	return ""
 }
 func (c *Config) StringMap() map[string]string {
