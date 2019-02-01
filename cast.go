@@ -69,7 +69,6 @@ func (c *Config) StringList() []string {
 	return str
 }
 
-//TODO:
 func (c *Config) Bool() bool {
 	switch val := c.Value.(type) {
 	case string:
@@ -81,19 +80,31 @@ func (c *Config) Bool() bool {
 			return true
 		}
 	case int16:
-		return strconv.FormatInt(int64(val), 10)
+		if val == 1 {
+			return true
+		}
 	case int32:
-		return strconv.FormatInt(int64(val), 10)
+		if val == 1 {
+			return true
+		}
 	case int8:
-		return strconv.FormatInt(int64(val), 10)
+		if val == 1 {
+			return true
+		}
 	case int64:
-		return strconv.FormatInt(val, 10)
+		if val == 1 {
+			return true
+		}
 	case float32:
-		return strconv.FormatFloat(float64(val), 'f', 3, 32)
+		if val == 1 {
+			return true
+		}
 	case float64:
-		return strconv.FormatFloat(val, 'f', 3, 64)
+		if val == 1 {
+			return true
+		}
 	case bool:
-		return strconv.FormatBool(val)
+		return val
 	}
 	return false
 }
