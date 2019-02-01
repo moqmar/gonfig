@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//TODO:
 func (c *Config) AnyMap() map[string]*Config {
 	r := map[string]*Config{}
 	for _, v := range c.Children {
@@ -12,6 +13,8 @@ func (c *Config) AnyMap() map[string]*Config {
 	}
 	return r
 }
+
+//TODO:
 func (c *Config) AnyList() []*Config {
 	return c.Children
 }
@@ -43,6 +46,8 @@ func (c *Config) String() string {
 	}
 	return ""
 }
+
+//TODO: muss hier überhaupt noch was gemacht werden?
 func (c *Config) StringMap() map[string]string {
 	str := map[string]string{}
 	for _, v := range c.Children {
@@ -50,6 +55,8 @@ func (c *Config) StringMap() map[string]string {
 	}
 	return str
 }
+
+//TODO: muss hier noch was gemacht werden?
 func (c *Config) StringList() []string {
 	if c.Type == String {
 		return []string{c.String()}
@@ -61,53 +68,86 @@ func (c *Config) StringList() []string {
 	return str
 }
 
+//TODO:
 func (c *Config) Bool() bool {
 	return false
 }
+
+//TODO:
 func (c *Config) BoolMap() map[string]bool {
 	return map[string]bool{}
 }
+
+//TODO:
 func (c *Config) BoolList() []bool {
 	return []bool{}
 }
 
+//TODO:
 func (c *Config) Int() int {
+	switch val := c.Value.(type) {
+	case string:
+		res, err := strconv.Atoi(val)
+		if err != nil {
+			return -999999
+		}
+		return res
+	}
 	v, _ := strconv.Atoi(c.String())
 	return v
 }
+
+//TODO:
 func (c *Config) IntMap() map[string]int {
 	return map[string]int{}
 }
+
+//TODO:
 func (c *Config) IntList() []int {
 	return []int{}
 }
 
+//TODO:
 func (c *Config) Float() float64 {
 	return 0
 }
+
+//TODO:
 func (c *Config) FloatMap() map[string]float64 {
 	return map[string]float64{}
 }
+
+//TODO:
 func (c *Config) FloatList() []float64 {
 	return []float64{}
 }
 
+//TODO:
 func (c *Config) Binary() []byte {
 	return []byte{}
 }
+
+//TODO:
 func (c *Config) BinaryMap() map[string][]byte {
 	return map[string][]byte{}
 }
+
+//TODO:
 func (c *Config) BinaryList() [][]byte {
 	return [][]byte{}
 }
 
+//TODO:
 func (c *Config) Time() time.Time {
 	return time.Unix(0, 0)
 }
+
+//TODO:
 func (c *Config) TimeMap() map[string]time.Time {
 	return map[string]time.Time{}
 }
+
+//TODO:
 func (c *Config) TimeList() []time.Time {
 	return []time.Time{}
 }

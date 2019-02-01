@@ -75,6 +75,8 @@ func (c *Config) Get(path ...string) *Config {
 	}
 	return c
 }
+
+//Return Child of c
 func (c *Config) Child(name string) *Config {
 	for _, c := range c.Children {
 		if c.Name == name && c.Exists {
@@ -88,25 +90,30 @@ func (c *Config) Child(name string) *Config {
 // Editing //
 /////////////
 
+//TODO: später
 // Set the value to `new` and update all children. Will remove comments and line breaks, and might reorder maps.
 func (c *Config) Update(new interface{}) error {
 	return nil
 }
 
+//TODO: später
 // Change so the new Value is `new`, but try to keep comments, map order and line breaks.
 func (c *Config) Apply(new interface{}) error {
 	return nil
 }
 
+//TODO: später
 // Replace the element by another one. Must not exist in the configuration tree yet!
 func (c *Config) Replace(new *Config) error {
 	return nil
 }
 
+//TODO: später
 func (c *Config) Delete() error {
 	return nil
 }
 
+//TODO: später
 func (c *Config) OnChange(handler func(*Config, string), deep bool) {
 	// handler(c, reason)
 }
@@ -115,6 +122,7 @@ func (c *Config) OnChange(handler func(*Config, string), deep bool) {
 // Casting //
 /////////////
 
+//TODO: Und was tut es?!?
 func (c *Config) Default(value interface{}) *Config {
 	c2 := &*c
 	if !c2.Exists {
@@ -123,6 +131,7 @@ func (c *Config) Default(value interface{}) *Config {
 	return c2
 }
 
+//TODO: Return True if native type ist t
 func (c *Config) Is(t Type) bool {
 	return true
 }

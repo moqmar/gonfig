@@ -50,6 +50,7 @@ func apply(data interface{}, cfg *Config) {
 	}
 }
 
+//TODO:
 func merge(cfg ...*Config) {
 
 }
