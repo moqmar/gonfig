@@ -2,6 +2,7 @@ package gonfig
 
 import (
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -70,6 +71,30 @@ func (c *Config) StringList() []string {
 
 //TODO:
 func (c *Config) Bool() bool {
+	switch val := c.Value.(type) {
+	case string:
+		if strings.ToLower(val) == "true" {
+			return true
+		}
+	case int:
+		if val == 1 {
+			return true
+		}
+	case int16:
+		return strconv.FormatInt(int64(val), 10)
+	case int32:
+		return strconv.FormatInt(int64(val), 10)
+	case int8:
+		return strconv.FormatInt(int64(val), 10)
+	case int64:
+		return strconv.FormatInt(val, 10)
+	case float32:
+		return strconv.FormatFloat(float64(val), 'f', 3, 32)
+	case float64:
+		return strconv.FormatFloat(val, 'f', 3, 64)
+	case bool:
+		return strconv.FormatBool(val)
+	}
 	return false
 }
 
