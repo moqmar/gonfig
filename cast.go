@@ -188,7 +188,7 @@ func (c *Config) Float() float64 {
 		}
 		return 0.0
 	}
-	return 9.9999
+	return -9.9999
 }
 
 //TODO:
@@ -201,9 +201,11 @@ func (c *Config) FloatList() []float64 {
 	return []float64{}
 }
 
-//TODO:
 func (c *Config) Binary() []byte {
-	return []byte{}
+	switch val := c.Value.(type) {
+	case string:
+		return []byte(val)
+	return []byte(c.String())
 }
 
 //TODO:

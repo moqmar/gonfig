@@ -69,8 +69,8 @@ func main() {
 
 - a **string**, and you want...
   - a **string**: you get the `string` value
-  - a **bool**: 
-  - an **int**: 
+  - a **bool**: if the String is "true" or "false" you get the string parsed, if that fails you get `false`
+  - an **int**: the string is casted to  an `Int`, if that fails, the funktion will return -999999.
   - a **float**:
   - a **binary**: you get the string as a `[]byte` slice
   - a **time**: the string is casted to a `time.Time` value, if that fails, the in-place-default or null value is used
@@ -85,15 +85,15 @@ func main() {
 
 - an **int**, and you want...
   - a **string**: 
-  - a **bool**: 
+  - a **bool**: if a equals 1 you get `true`, else you get `false` 
   - an **int**: you get the `int` value
   - a **float**:
-  - a **binary**: 
+  - a **binary**: you get the string as a `[    ]byte` slice
   - a **time**: you get a `time.Time` value, the original value is used as a unix timestamp
 
 - a **float**, and you want...
   - a **string**: 
-  - a **bool**: 
+  - a **bool**: if a equals 1 you get `true`, else you get `false`
   - an **int**: 
   - a **float**: you get the `float` value
   - a **binary**: you get the string as a `[]byte` slice
