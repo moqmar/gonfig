@@ -119,7 +119,6 @@ func (c *Config) BoolList() []bool {
 	return []bool{}
 }
 
-//TODO:
 func (c *Config) Int() int {
 	switch val := c.Value.(type) {
 	case string:
@@ -128,9 +127,27 @@ func (c *Config) Int() int {
 			return -999999
 		}
 		return res
+	case int:
+		return val
+	case int16:
+		return int(val)
+	case int32:
+		return int(val)
+	case int8:
+		return int(val)
+	case int64:
+		return int(val)
+	case float32:
+		return int(val)
+	case float64:
+		return int(val)
+	case bool:
+		if val {
+			return 1
+		}
+		return 0
 	}
-	v, _ := strconv.Atoi(c.String())
-	return v
+	return -999999
 }
 
 //TODO:
