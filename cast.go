@@ -160,9 +160,35 @@ func (c *Config) IntList() []int {
 	return []int{}
 }
 
-//TODO:
 func (c *Config) Float() float64 {
-	return 0
+	switch val := c.Value.(type) {
+	case string:
+		res, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			return -9.99999
+		}
+		return res
+	case int:
+		return float64(val)
+	case int16:
+		return float64(val)
+	case int32:
+		return float64(val)
+	case int8:
+		return float64(val)
+	case int64:
+		return float64(val)
+	case float32:
+		return float64(val)
+	case float64:
+		return val
+	case bool:
+		if val {
+			return 1.0
+		}
+		return 0.0
+	}
+	return 9.9999
 }
 
 //TODO:
