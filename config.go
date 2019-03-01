@@ -1,7 +1,6 @@
 package gonfig
 
 import (
-	"fmt"
 	"io/ioutil"
 
 	yaml "gopkg.in/yaml.v2"
@@ -17,18 +16,18 @@ func Open(file ...string) *Config {
 
 	data := map[interface{}]interface{}{} // TODO: anything?!
 	yaml.Unmarshal(f, data)
-	fmt.Printf("%+v\n", data)
+
 	cfg := &Config{}
 	apply(data, cfg)
-	fmt.Printf("%+v\n", cfg)
+
 	return cfg
 }
 
 // OpenDynamic loads a configuration file into the memory and returns a Config object that changes when the file changes and supports OnChange handlers.
-func OpenDynamic(file ...string) *Config {
-	// TODO:
-	return nil
-}
+//func OpenDynamic(file ...string) *Config {
+// TODO:
+//return nil
+//}
 
 // Env uses environment variables as the default configuration.
 // You can specify a blacklist with paths that won't be read from the environment, or use ...config.SystemBlacklist to ignore common system variables.

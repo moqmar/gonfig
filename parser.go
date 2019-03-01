@@ -8,7 +8,6 @@ import (
 func apply(data interface{}, cfg *Config) {
 	switch x := data.(type) {
 	case map[interface{}]interface{}:
-		fmt.Printf("Got map: %s\n", cfg.Path)
 		cfg.Exists = true
 		cfg.Type = AnyMap // TODO: should be more specific!
 		cfg.Children = []*Config{}
@@ -27,7 +26,6 @@ func apply(data interface{}, cfg *Config) {
 			cfg.Children = append(cfg.Children, child)
 		}
 	case []interface{}:
-		fmt.Printf("Got list: %s\n", cfg.Path)
 		cfg.Exists = true
 		cfg.Type = AnyList // TODO: should be more specific!
 		cfg.Children = []*Config{}
@@ -43,7 +41,6 @@ func apply(data interface{}, cfg *Config) {
 			cfg.Children = append(cfg.Children, child)
 		}
 	default:
-		fmt.Printf("Got any: %s\n", cfg.Path)
 		cfg.Exists = true
 		cfg.Value = data
 		cfg.Type = String // TODO: should be more specific!
